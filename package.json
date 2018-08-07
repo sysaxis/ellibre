@@ -1,0 +1,19 @@
+{
+  "name": "ellibre",
+  "version": "1.0.0",
+  "description": "Advanced functionalities for web architecture written in vanilla js.",
+  "main": "build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vanilla",
+    "library",
+    "javascript",
+    "architecture",
+    "DOM",
+    "binding"
+  ],
+  "author": "Eduard Kotov (sysaxis)",
+  "license": "MIT"
+}

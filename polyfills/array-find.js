@@ -1,0 +1,2 @@
+// https://tc39.github.io/ecma262/#sec-array.prototype.find
+'use strict';(function(){Array.prototype.find||Object.defineProperty(Array.prototype,'find',{value:function value(a){if(null==this)throw new TypeError('"this" is null or not defined');var b=Object(this),c=b.length>>>0;if('function'!=typeof a)throw new TypeError('predicate must be a function');for(var f,d=arguments[1],e=0;e<c;){if(f=b[e],a.call(d,f,e,b))return f;e++}},configurable:!0,writable:!0})})();
