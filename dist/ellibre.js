@@ -218,7 +218,7 @@
 	    });
 	
 	    _properties.forEach(function(property) {
-	        if (!property.observer) return;
+	        var propertyObserver = property.observer;
 	
 	        var targetObject = property.targetObject,
 	            propertyName = property.propertyName;
@@ -228,8 +228,12 @@
 	        targetObject.addEventListener('change', function(event) {
 	
 	            var newValue = targetObject[propertyName];
-	            var observedResult = property.observer.call(this, targetObject, newValue, _value); // refObj, newVal, oldVal
-	
+	            var observedResult;
+	            if (propertyObserver)
+	                observedResult = propertyObserver.call(this, targetObject, newValue, _value); // refObj, newVal, oldVal
+	            else
+	                observedResult = newValue;
+	            
 	            if (observedResult === undefined) return;
 	            
 	            event.preventDefault();

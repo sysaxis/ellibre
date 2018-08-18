@@ -83,7 +83,7 @@ function bindObjectWithDOM(object, objectProperty, element, elementProperties, p
 
     // add listeners to element property changes
     _properties.forEach(function(property) {
-        if (!property.observer) return;
+        var propertyObserver = property.observer;
 
         var targetObject = property.targetObject,
             propertyName = property.propertyName;
@@ -93,9 +93,13 @@ function bindObjectWithDOM(object, objectProperty, element, elementProperties, p
         targetObject.addEventListener('change', function(event) {
 
             var newValue = targetObject[propertyName];
-            var observedResult = property.observer.call(this, targetObject, newValue, _value); // refObj, newVal, oldVal
-
-            // if value returned other than undefined then it will be set on the DOM element property
+            var observedResult;
+            if (propertyObserver)
+                observedResult = propertyObserver.call(this, targetObject, newValue, _value); // refObj, newVal, oldVal
+            else
+                observedResult = newValue;
+            
+            // if value is other than undefined then it will be set on the DOM element property
             if (observedResult === undefined) return;
             
             event.preventDefault();
