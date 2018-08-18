@@ -31,7 +31,7 @@
 
 	window.Animate = Animate;
 	
-	// https://gist.github.com/paulirish/5438650
+	/* https://gist.github.com/paulirish/5438650 */
 	(function() {
 	    if ("performance" in window == false) {
 	        window.performance = {};
@@ -50,7 +50,7 @@
 	    }
 	})();
 	
-	// https://gist.github.com/paulirish/1579671
+	/* https://gist.github.com/paulirish/1579671 */
 	(function() {
 	    var lastTime = 0;
 	    var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -113,13 +113,6 @@
 	        peek: function(x) { return Math.pow(Math.sin(x * Math.PI), power); }
 	    };
 	
-	    // sin(x*Pi/2)^(1/2)
-	    //return Math.sqrt(Math.sin(x * Math.PI / power));
-	    // (asin(x*2-1)/Pi+0.5)^1
-	    //return 0.5 + (Math.asin(Math.pow(2 * x - 1, 2 * power - 1)) / Math.PI);
-	    // x^2
-	    // return Math.pow(x, power);
-	    // (e^(k x) - 1) / (e^k - 1) // best so far 500ms, 3
 	        
 	    var scaleFormula = styles[style || 'pop'];
 	
@@ -177,11 +170,9 @@
 	
 	    var _value = _object[_objectProperty];
 	
-	    // create reference object for properties: [{ propertyName, targetObject, mutator, observer }]
 	    var _properties; 
 	    
 	    if (!Array.isArray(elementProperties)) {
-	        // { selector: mutator || {mutator, observer} }
 	        _properties = Object.keys(elementProperties).map(function(propertySelector) {
 	            var property = elementProperties[propertySelector];
 	            var propertyReference = _getTargetPropertyAtAddress(element, propertySelector);
@@ -195,7 +186,6 @@
 	            return propertyReference;
 	        });
 	    } else {
-	        // [{selector, mutator, observer}]
 	        _properties = elementProperties.map(function(property) {
 	            var propertyReference = _getTargetPropertyAtAddress(element, property.selector);
 	            propertyReference.mutator = property.mutator;
@@ -206,12 +196,10 @@
 	        });
 	    }
 	    
-	    // set initial property values
 	    _properties.forEach(function(property) {
 	        property.targetObject[property.propertyName] = property.mutator ? property.mutator(_value) : _value;
 	    });
 	
-	    // define accessors for given object
 	    Object.defineProperty(_object, _objectProperty, {
 	        enumerable: true,
 	        get: function() {
@@ -229,7 +217,6 @@
 	        }
 	    });
 	
-	    // add listeners to element property changes
 	    _properties.forEach(function(property) {
 	        if (!property.observer) return;
 	
@@ -243,7 +230,6 @@
 	            var newValue = targetObject[propertyName];
 	            var observedResult = property.observer.call(this, targetObject, newValue, _value); // refObj, newVal, oldVal
 	
-	            // if value returned other than undefined then it will be set on the DOM element property
 	            if (observedResult === undefined) return;
 	            
 	            event.preventDefault();
@@ -341,7 +327,6 @@
 	    const propertyDescriptors = _getOwnPropertyDescriptors(Array.prototype);
 	    Object.keys(propertyDescriptors).forEach(function(property) {
 	
-	        // the property will be binded to array, but applied on reference!
 	        var descriptor = propertyDescriptors[property];
 	        var attributes = {
 	            configurable: descriptor.configurable,
@@ -358,7 +343,6 @@
 	                return newValue;
 	            }
 	        };
-	        // exception to length
 	        if (property === 'length') {
 	            delete attributes.value;
 	            delete attributes.writable;

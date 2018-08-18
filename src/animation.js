@@ -1,7 +1,7 @@
 
 window.Animate = Animate;
 
-// https://gist.github.com/paulirish/5438650
+/* https://gist.github.com/paulirish/5438650 */
 (function() {
     if ("performance" in window == false) {
         window.performance = {};
@@ -20,7 +20,7 @@ window.Animate = Animate;
     }
 })();
 
-// https://gist.github.com/paulirish/1579671
+/* https://gist.github.com/paulirish/1579671 */
 (function() {
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];

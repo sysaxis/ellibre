@@ -42,7 +42,9 @@ function buildDists() {
 
     for(var k in srcFiles) {
         var srcContent = fs.readFileSync(srcDir + '/' + srcFiles[k], 'utf8');
-        src += srcContent.split(/\r?\n/g).join('\r\n\t') + '\r\n';
+        var srcContentLines = srcContent.split(/\r?\n/g);
+        var cleanedContentLines = srcContentLines.filter(line => !/^\s*\/\//.exec(line));
+        src += cleanedContentLines.join('\r\n\t') + '\r\n';
     }
 
     src += '})();';
